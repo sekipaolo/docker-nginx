@@ -2,17 +2,12 @@
 
 set -u
 mkdir -p /var/run/
-# User params
+
 NGINX_PID_FILE="/run/nginx.pid"
 NGINX_CONFIG="/etc/nginx/nginx.conf"
 NGINX_CMD="nginx -c $NGINX_CONFIG"
 NGINX_CHECK_CONFIG_CMD="$NGINX_CMD -t"
 
-#######################################
-# Echo/log function
-# Arguments:
-#   String: value to log
-#######################################
 log() {
   if [[ "$@" ]]; then echo "[`date +'%Y-%m-%d %T'`] $@";
   else echo; fi
@@ -20,7 +15,7 @@ log() {
 
 log "waiting 1 seconds"
 sleep 1
-# Launch HAProxy.
+
 $NGINX_CHECK_CONFIG_CMD
 $NGINX_CMD
 
