@@ -25,7 +25,7 @@ log "Nginx started with $NGINX_CONFIG config, pid $(cat $NGINX_PID_FILE)."
 
 # Check if config has changed
 # Note: also monitor /etc/hosts where the new back-end hosts might be provided.
-while inotifywait -q -e create,delete,modify,attrib $NGINX_CONFIG $NGINX_SITES/*; do
+while inotifywait -q -e create,delete,modify,attrib $NGINX_CONFIG $NGINX_SITES; do
   log "Restarting NGINX due to config changes..."
   $NGINX_CHECK_CONFIG_CMD
   $NGINX_CMD -s reload
